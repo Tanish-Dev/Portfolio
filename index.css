@@ -8,10 +8,11 @@ body {
 }
 
 h1 {
-  font-size: 16vw;
+  font-size: 15.5vw;
   font-weight: 600;
   letter-spacing: -0.05em;
   margin: 0;
+  color: #080808;
 }
 
 h2 {
@@ -52,9 +53,25 @@ h3 {
   position: relative; /* Added to properly position layover text */
 }
 .gradient-block {
-  background: linear-gradient(90deg, #ff4747, #1a1a1a, #161616);
+  background: linear-gradient(90deg, #ff4747, #242424, #222222);
   height: 35vw;
   width: 95%;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Adding noise texture overlay */
+.gradient-block::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.07;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 1;
 }
 
 .layover-text {
@@ -69,6 +86,16 @@ h3 {
   font-weight: 600;
   letter-spacing: -0.04em;
   z-index: 2; /* Ensure text stays on top */
+}
+.sub-text {
+  text-align: end;
+  margin-right: 10vw;
+  margin-top: -0.5vw;
+}
+
+.sub-text h3 {
+  font-size: 2.5vw;
+  color: rgb(80, 80, 80);
 }
 
 .taskbar__container {
@@ -115,6 +142,7 @@ h3 {
 .tick {
   width: 40%;
   margin-left: 5vw;
+  margin-top: -4vw;
 }
 
 .container2 {
@@ -189,7 +217,11 @@ h3 {
 
 /* About Section Styles */
 .about_section {
-  width: 80%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 90%;
+  gap: 3rem;
   max-width: 1200px;
   margin: 10vw auto;
   padding: 0 2rem;
@@ -197,18 +229,45 @@ h3 {
 
 .about_content {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 3rem;
-  margin-top: 3rem;
+  width: 120%;
+  justify-content: center;
+  align-items: center;
 }
 
 .about_text {
+  align-items: center;
   font-size: 1.2rem;
   line-height: 1.6;
+  margin-top: 10px;
+  padding-top: 50px;
 }
 
 .about_text p {
   margin-bottom: 1.5rem;
+}
+
+/* Profile Image Styles */
+.profile_image_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile_image {
+  width: 100%;
+  max-width: 550px;
+  height: auto;
+  transition: transform 0.3s ease;
+}
+
+/* Skills Section Styles */
+.skills_section {
+  width: 80%;
+  max-width: 1200px;
+  margin: 3rem auto 6rem;
+  padding: 0 2rem;
 }
 
 .skills_container {
@@ -219,7 +278,7 @@ h3 {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   gap: 1rem;
-  margin-top: 1rem;
+  margin-top: 1.5rem;
 }
 
 .skill_item {
@@ -270,6 +329,10 @@ h3 {
   font-weight: 500;
   transition: background-color 0.3s ease, transform 0.3s ease;
 }
+.sub-container {
+  display: flex;
+  flex-direction: column;
+}
 
 .contact_link:hover {
   background-color: #333;
@@ -298,10 +361,6 @@ footer {
 
 /* Responsive Styles */
 @media (min-width: 768px) {
-  .about_content {
-    flex-direction: row;
-  }
-
   .about_text {
     flex: 2;
   }
@@ -316,24 +375,42 @@ footer {
   }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 8px) {
+}
+@media (max-width: 768px) {
+  .tick {
+    display: none;
+  }
+  .sub-text h3 {
+    font-size: 4vw;
+    text-align: start;
+    margin: 0;
+    margin-left: 5vw;
+    margin-top: 3vw;
+  }
   .card_container {
     grid-template-columns: 1fr;
   }
-
+  .about_section {
+    flex-direction: column;
+    align-items: center;
+  }
+  .about_text {
+    padding-top: 0;
+  }
   .taskbar {
     display: none;
   }
-
-  h1 {
-    font-size: 14vw;
+  .profile_image {
+    width: 100%;
+    max-width: 400px;
   }
 
   h2 {
     font-size: 9vw;
   }
   .gradient-block {
-    height: 60vw;
+    height: 80vw;
   }
   .layover-text {
     font-size: 6vw;
@@ -343,6 +420,10 @@ footer {
   .screen h1 {
     font-size: 17vw;
     margin-left: 20px;
+  }
+  .about_content {
+    display: flex;
+    flex-direction: column;
   }
 }
 @media (max-width: 426px) {
@@ -564,6 +645,7 @@ a {
 .bento-box.large {
   grid-column: span 2;
   grid-row: span 2;
+  border: solid black 2px;
 }
 
 .bento-box.medium {
