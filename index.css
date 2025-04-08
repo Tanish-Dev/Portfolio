@@ -627,7 +627,7 @@ h3 {
   font-size: 1.2rem;
   line-height: 1.6;
   margin-top: 10px;
-  padding-top: 50px;
+  padding-top: 20px;
 }
 
 .about_text p {
@@ -688,7 +688,7 @@ h3 {
   line-height: 1.8;
   max-width: 800px;
   position: relative;
-  padding-left: 1rem;
+  padding-left: 2rem;
   border-left: 3px solid #d94c44;
 }
 
@@ -1073,7 +1073,7 @@ footer {
   .email-container {
     padding: 0.5rem 1rem;
   }
-  .email-container .email {
+  .email-container {
     display: none;
   }
 }
@@ -1445,5 +1445,50 @@ a {
   /* Prevent scrolling when menu is active */
   body.menu-open {
     overflow: hidden;
+  }
+}
+
+/* Resume Section Styles - Compact Version */
+.resume-section {
+  margin: 2.5rem 0;
+  padding: 0;
+  transition: all 0.3s ease;
+  text-align: left;
+}
+.email-container {
+  display: none;
+}
+.resume-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  background-color: var(--bento-bg-3);
+  color: white;
+  padding: 0.85rem 1.75rem;
+  border-radius: 50px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  box-shadow: 5px 5px 0px #000;
+  text-decoration: none;
+}
+
+.resume-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 7px 7px 0px #000;
+}
+
+.resume-button svg {
+  transition: transform 0.3s ease;
+}
+
+.resume-button:hover svg {
+  transform: translateY(2px);
+}
+
+/* Responsive styles for resume section */
+@media (max-width: 768px) {
+  .resume-button {
+    width: auto;
+    justify-content: center;
   }
 }
