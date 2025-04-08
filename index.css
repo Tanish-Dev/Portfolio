@@ -20,6 +20,7 @@
   --footer-text: #333;
   --email-container-bg: #f5f5f5;
   --card-border: solid black 1.2px;
+  --active-nav-color: white; /* Added new variable for active nav item */
 }
 
 [data-theme="dark"] {
@@ -219,6 +220,19 @@ h3 {
 
 .taskbar__item:hover {
   color: white;
+}
+
+/* New styles for active taskbar item - removing the dot */
+.taskbar__item.active {
+  color: var(--active-nav-color);
+  position: relative;
+}
+
+/* Also add styles for mobile menu active items */
+.mobile-menu-item.active {
+  background-color: var(--card-bg);
+  font-weight: 600;
+  transform: translateX(10px);
 }
 
 .tick {

@@ -168,6 +168,146 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
+  // Active section highlighting in navigation
+  // Get all sections that we want to track
+  const sections = document.querySelectorAll(
+    "#home, #skills, #work, #story, #contact"
+  );
+  const navItems = {
+    "#home": document.querySelector('a[href="#home"]'),
+    "#skills": document.querySelector('a[href="#skills"]'),
+    "#work": document.querySelector('a[href="#work"]'),
+    "#story": document.querySelector('a[href="#story"]'),
+    "#contact": document.querySelector('a[href="#contact"]'),
+  };
+
+  const mobileNavItems = {
+    "#home": document.querySelector('.mobile-menu-item[href="#home"]'),
+    "#skills": document.querySelector('.mobile-menu-item[href="#skills"]'),
+    "#work": document.querySelector('.mobile-menu-item[href="#work"]'),
+    "#story": document.querySelector('.mobile-menu-item[href="#story"]'),
+    "#contact": document.querySelector('.mobile-menu-item[href="#contact"]'),
+  };
+
+  // Options for the Intersection Observer - adjusted for better section detection
+  const options = {
+    threshold: [0.2, 0.3, 0.4, 0.5, 0.6], // Multiple thresholds for smoother transitions
+    rootMargin: "-80px 0px -80px 0px", // Account for taskbar height
+  };
+
+  function resetActiveLinks() {
+    // Remove active class from all taskbar items
+    taskbarLinks.forEach((link) => link.classList.remove("active"));
+
+    // Remove active class from all mobile menu items
+    mobileMenuItems.forEach((item) => item.classList.remove("active"));
+  }
+
+  function setActiveLink(sectionId) {
+    // Reset all active states
+    resetActiveLinks();
+
+    // Set active class for the taskbar item
+    if (navItems[sectionId]) {
+      navItems[sectionId].classList.add("active");
+    }
+
+    // Set active class for the mobile menu item
+    if (mobileNavItems[sectionId]) {
+      mobileNavItems[sectionId].classList.add("active");
+    }
+  }
+
+  // Create a map to store intersection ratios
+  const sectionVisibility = new Map();
+
+  // Create the Intersection Observer with improved detection
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      // Store the intersection ratio for each section
+      sectionVisibility.set(entry.target.id, entry.intersectionRatio);
+    });
+
+    // Find the section with the highest visibility
+    let maxRatio = 0;
+    let maxSection = null;
+
+    sectionVisibility.forEach((ratio, sectionId) => {
+      // Special handling for work section - require higher visibility
+      if (sectionId === "work") {
+        // Only consider work section if it has significant visibility
+        if (ratio > 0.4 && ratio > maxRatio) {
+          maxRatio = ratio;
+          maxSection = sectionId;
+        }
+      } else if (ratio > maxRatio) {
+        maxRatio = ratio;
+        maxSection = sectionId;
+      }
+    });
+
+    // Only update active link if we have a visible section
+    if (maxSection) {
+      setActiveLink(`#${maxSection}`);
+    }
+  }, options);
+
+  // Observe all sections
+  sections.forEach((section) => {
+    observer.observe(section);
+    // Initialize the visibility map
+    sectionVisibility.set(section.id, 0);
+  });
+
+  // Set initial active state based on scroll position
+  function setInitialActiveSection() {
+    let currentSectionId = "#home"; // Default to home
+    let maxVisibility = 0;
+
+    sections.forEach((section) => {
+      const rect = section.getBoundingClientRect();
+      const viewportHeight = window.innerHeight;
+
+      // Calculate how much of the section is visible
+      const visibleHeight =
+        Math.min(rect.bottom, viewportHeight) - Math.max(rect.top, 0);
+
+      // Avoid negative values
+      if (visibleHeight <= 0) return;
+
+      // Calculate percentage of section height that's visible
+      const visibilityPercentage = visibleHeight / section.offsetHeight;
+
+      // Special handling for work section to prevent incorrect highlighting
+      if (section.id === "work") {
+        // For work section, require more visibility and a higher position in the viewport
+        const isNearTop = rect.top < viewportHeight * 0.4;
+        if (visibilityPercentage > maxVisibility && isNearTop) {
+          maxVisibility = visibilityPercentage;
+          currentSectionId = `#${section.id}`;
+        }
+      } else if (visibilityPercentage > maxVisibility) {
+        maxVisibility = visibilityPercentage;
+        currentSectionId = `#${section.id}`;
+      }
+    });
+
+    setActiveLink(currentSectionId);
+  }
+
+  // Set initial active section when the page loads
+  setInitialActiveSection();
+
+  // Add fallback for scroll event in case IntersectionObserver doesn't work well
+  window.addEventListener("scroll", () => {
+    // Use debouncing to avoid performance issues
+    if (!window.requestAnimationFrame) {
+      setTimeout(setInitialActiveSection, 300);
+    } else {
+      window.requestAnimationFrame(setInitialActiveSection);
+    }
+  });
+
   // Typewriter effect for credits
   const creditsElement = document.getElementById("creditsText");
   const creditsText = "< Code by Tanish />";
