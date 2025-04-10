@@ -10,6 +10,29 @@ document.addEventListener("DOMContentLoaded", function () {
   const mobileSunIconCircle = document.querySelector(".mobile-sun-icon-circle");
   const mobileSunIconLines = document.querySelectorAll(".mobile-sun-icon-line");
 
+  // Scroll Reveal Animation
+  const revealSections = document.querySelectorAll(".reveal-section");
+
+  // Intersection Observer for scroll reveal animations - updated for earlier triggering
+  const revealObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("active");
+        }
+      });
+    },
+    {
+      threshold: 0.05, // Reduced threshold - trigger when just 5% of the element is visible
+      rootMargin: "0px 0px -10% 0px", // Adjusted to trigger before elements fully enter the viewport
+    }
+  );
+
+  // Observe all reveal sections
+  revealSections.forEach((section) => {
+    revealObserver.observe(section);
+  });
+
   // Hamburger Menu Functionality
   const hamburgerMenu = document.querySelector(".hamburger-menu");
   const mobileMenu = document.querySelector(".mobile-menu");

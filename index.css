@@ -21,6 +21,10 @@
   --email-container-bg: #f5f5f5;
   --card-border: solid black 1.2px;
   --active-nav-color: white; /* Added new variable for active nav item */
+
+  /* Scroll animation variables - faster duration */
+  --reveal-distance: 50px;
+  --reveal-duration: 0.6s;
 }
 
 [data-theme="dark"] {
@@ -1513,4 +1517,48 @@ a {
     width: auto;
     justify-content: center;
   }
+}
+
+/* Scroll reveal animation styles */
+.reveal-section {
+  opacity: 0;
+  transform: translateY(var(--reveal-distance));
+  transition: opacity var(--reveal-duration) ease,
+    transform var(--reveal-duration) ease;
+}
+
+.reveal-section.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Different delay options for elements */
+.delay-100 {
+  transition-delay: 0.1s;
+}
+
+.delay-200 {
+  transition-delay: 0.2s;
+}
+
+.delay-300 {
+  transition-delay: 0.3s;
+}
+
+.delay-400 {
+  transition-delay: 0.4s;
+}
+
+/* Different direction options */
+.reveal-right {
+  transform: translateX(calc(-1 * var(--reveal-distance)));
+}
+
+.reveal-left {
+  transform: translateX(var(--reveal-distance));
+}
+
+.reveal-right.active,
+.reveal-left.active {
+  transform: translateX(0);
 }
