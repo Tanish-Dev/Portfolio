@@ -1053,7 +1053,7 @@ footer {
   }
 }
 
-@media (max-width: 426px) {
+@media (max-width: 460px) {
   .custom-footer {
     height: 100px;
     flex-direction: column;
