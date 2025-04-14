@@ -771,64 +771,67 @@ h3 {
 }
 
 .contact_form {
-  margin-top: 2rem;
-  padding: 2rem;
-  background-color: #ffffff;
-  border-radius: 16px;
+  background-color: rgba(128, 128, 128, 0.05);
+  padding: 25px;
+  border-radius: 10px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(128, 128, 128, 0.1);
+  max-width: 90%;
+  margin: 0 auto;
 }
 
 .form_group {
-  margin-bottom: 1.5rem;
+  margin-bottom: 16px;
 }
 
 .form_label {
   display: block;
-  margin-bottom: 0.5rem;
+  margin-bottom: 6px;
   font-weight: 500;
-  color: #333;
+  color: var(--headline-color);
+  font-size: 0.95rem;
 }
 
 .form_input,
 .form_textarea {
-  width: 100%;
-  padding: 1rem;
-  border: 2px solid #eaeaea;
-  border-radius: 8px;
+  width: 92%;
+  padding: 10px 12px;
+  border: 1px solid rgba(128, 128, 128, 0.2);
+  border-radius: 5px;
   font-family: inherit;
-  font-size: 1rem;
-  transition: border-color 0.3s ease;
-  background-color: #f9f9f9;
+  font-size: 0.95rem;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .form_input:focus,
 .form_textarea:focus {
   outline: none;
-  border-color: #d94c44;
-  box-shadow: 0 0 0 3px rgba(217, 76, 68, 0.2);
+  border-color: var(--accent-color, #d94c44);
+  box-shadow: 0 0 0 3px rgba(217, 76, 68, 0.1);
 }
 
 .form_textarea {
   resize: vertical;
-  min-height: 120px;
+  min-height: 100px;
 }
 
 .form_button {
-  background-color: #d94c44;
-  color: white;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: var(--headline-color);
+  color: var(--bg-primary);
   border: none;
-  padding: 1rem 2rem;
-  border-radius: 50px;
-  font-weight: 600;
-  font-size: 1rem;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 0.95rem;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 5px 5px 0px #000;
-}
-
-.form_button:hover {
-  transform: translateY(-3px);
-  box-shadow: 7px 7px 0px #000;
+  box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.2);
+  margin-top: 8px;
+  font-weight: 400;
 }
 
 .contact_socials {
@@ -1574,26 +1577,69 @@ a {
   transform: translateX(0);
 }
 
-/* Learn More Button */
+/* Learn More Button - Improved */
 .learn-more-button {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 8px 16px;
+  gap: 0.75rem;
+  padding: 0.85rem 1.75rem;
   background-color: transparent;
-  color: var(--text-color);
-  border: 1px solid var(--text-color);
-  border-radius: 4px;
-  font-size: 14px;
+  color: var(--text-primary);
+  border: 2px solid var(--bento-bg-3);
+  border-radius: 50px;
+  font-size: 1rem;
   font-weight: 500;
   text-decoration: none;
   transition: all 0.3s ease;
-  margin-left: 10px;
+  margin-left: 15px;
+  box-shadow: 3px 3px 0px #000;
+  position: relative;
+  overflow: hidden;
+}
+
+.learn-more-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+
+  z-index: -1;
+}
+
+.learn-more-button:hover::before {
+  left: 100%;
 }
 
 .learn-more-button:hover {
-  background-color: var(--text-color);
-  color: var(--background-color);
+  color: white;
+  transform: translateY(-3px);
+  box-shadow: 5px 5px 0px #000;
+}
+
+.learn-more-button svg {
+  transition: transform 0.3s ease;
+}
+
+.learn-more-button:hover svg {
+  transform: translateX(3px);
+  stroke: white;
+}
+
+@media (max-width: 768px) {
+  .resume-section {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .learn-more-button {
+    margin-left: 0;
+    justify-content: center;
+    width: 100%;
+    margin-top: 10px;
+  }
 }
 
 /* About Page Styles */
@@ -1705,6 +1751,7 @@ a {
 .about-section h2 {
   color: var(--accent-color);
   margin-bottom: 25px;
+  font-size: 3.2rem;
 }
 
 .section-content {
@@ -1801,7 +1848,7 @@ a {
   gap: 8px;
   padding: 10px 20px;
   background-color: var(--accent-color);
-  color: white;
+  color: var(--headline-color);
   border: none;
   border-radius: 4px;
   font-size: 14px;
@@ -1930,31 +1977,34 @@ a {
 /* Contact Form Styles - Updated */
 .contact-form {
   background-color: rgba(128, 128, 128, 0.05);
-  padding: 30px;
+  padding: 25px;
   border-radius: 10px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
   border: 1px solid rgba(128, 128, 128, 0.1);
+  max-width: 90%;
+  margin: 0 auto;
 }
 
 .form-group {
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }
 
 .form-label {
   display: block;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
   font-weight: 500;
   color: var(--headline-color);
+  font-size: 0.95rem;
 }
 
 .form-input,
 .form-textarea {
-  width: 94%;
-  padding: 12px 15px;
+  width: 92%;
+  padding: 10px 12px;
   border: 1px solid rgba(128, 128, 128, 0.2);
   border-radius: 5px;
   font-family: inherit;
-  font-size: 1rem;
+  font-size: 0.95rem;
   background-color: var(--bg-primary);
   color: var(--text-primary);
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
@@ -1969,30 +2019,24 @@ a {
 
 .form-textarea {
   resize: vertical;
-  min-height: 120px;
+  min-height: 100px;
 }
 
 .form-button {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   background-color: var(--headline-color);
-  color: white;
+  color: var(--bg-primary);
   border: none;
-  padding: 12px 24px;
+  padding: 10px 20px;
   border-radius: 5px;
-  font-weight: 600;
-  font-size: 1rem;
+  font-size: 0.95rem;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.2);
-  margin-top: 10px;
-}
-
-.form-button:hover {
-  background-color: var(--accent-color, #d94c44);
-  transform: translateY(-3px);
-  box-shadow: 7px 7px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.2);
+  margin-top: 8px;
+  font-weight: 400;
 }
 
 .form-button svg {
@@ -2046,7 +2090,7 @@ a {
   color: var(--bg-primary);
   text-decoration: none;
   padding: 12px 24px;
-  border-radius: 25px;
+  border-radius: 30px;
   font-weight: 600;
   font-size: 1rem;
   transition: all 0.3s ease;
@@ -2058,6 +2102,7 @@ a {
   background-color: var(--accent-color, #d94c44);
   transform: translateY(-3px);
   box-shadow: 7px 7px 0px rgba(0, 0, 0, 0.2);
+  color: white;
 }
 
 /* Responsive Styles - Unchanged */
