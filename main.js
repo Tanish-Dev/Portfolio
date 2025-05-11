@@ -1,4 +1,6 @@
 // Theme toggle functionality
+console.log("Nothing to see here, Bitchhhhh...");
+
 document.addEventListener("DOMContentLoaded", function () {
   const themeToggle = document.getElementById("themeToggle");
   const mobileDarkMode = document.getElementById("mobileDarkMode");
