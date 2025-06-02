@@ -1353,7 +1353,7 @@ a {
 .hamburger-line {
   width: 24px;
   height: 2px;
-  background-color: var(--text-primary);
+  background-color: rgb(220, 220, 220);
   margin: 5px 0;
   border-radius: 5px;
 }
