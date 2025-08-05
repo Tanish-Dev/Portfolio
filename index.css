@@ -1332,7 +1332,12 @@ footer {
 }
 .social-icons a {
   display: inline-block;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.social-icons a:hover {
+  transform: translateY(-12px);
+  
 }
 
 .social-icons img {
